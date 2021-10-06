@@ -25,13 +25,13 @@ namespace SchoolSystem.API.Controllers
             return await _services.GetStudentsInfo();
         }
 
-        [HttpGet("StudentInfo/{firstName}_{lastName}")]
+        [HttpGet("StudentI")]
         public async Task<ActionResult<EnrolledStudentInfoHelperDto>> GetStudentData(string firstName, string lastName)
         {
             return await _services.GetStudentInfo(firstName, lastName);
         }
 
-        [HttpGet("Classes/{id}")]
+        [HttpGet("Classes")]
         public async Task<ActionResult<ClassInfoHelperDto>> GetClassData(int id)
         {
             return  await _services.GetClassInfo(id );
