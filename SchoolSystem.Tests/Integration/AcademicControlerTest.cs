@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.OpenApi.Validations;
 using Moq;
 using SchoolSystem.API.Controllers;
 using SchoolSystem.Data.Helpers;
@@ -13,13 +12,13 @@ namespace SchoolSystem.Tests.Integration
 {
     public class AcademicControlerTest
     {
-        private readonly AcademicController _academicsController;
+        private readonly AcademicController _academicController;
         private readonly Mock<ISchoolServices> _mockServices = new Mock<ISchoolServices>();
 
 
         public AcademicControlerTest()
         {
-            _academicsController = new AcademicController(_mockServices.Object);
+            _academicController = new AcademicController(_mockServices.Object);
         }
 
         // TestSessionInfo GetStudentsData
@@ -38,7 +37,7 @@ namespace SchoolSystem.Tests.Integration
 
             // Act
 
-            var getStudentsData = await _academicsController.GetStudentsData();
+            var getStudentsData = await _academicController.GetStudentsData();
 
             // Assert
 
@@ -67,7 +66,7 @@ namespace SchoolSystem.Tests.Integration
 
             // ACT
 
-            var getStudentData = await _academicsController.GetStudentData(firstName, lastName);
+            var getStudentData = await _academicController.GetStudentData(firstName, lastName);
 
             // Assert
 
@@ -94,7 +93,7 @@ namespace SchoolSystem.Tests.Integration
 
             // Act
 
-            var result = await _academicsController.GetClassData(classInfo.Class);
+            var result = await _academicController.GetClassData(classInfo.Class);
 
             // Assert
 
@@ -126,7 +125,7 @@ namespace SchoolSystem.Tests.Integration
             };
             _mockServices.Setup(s => s.GetToppersInfo()).ReturnsAsync(toppersInfo);
             // Act
-            var toppersData = await _academicsController.GetTopStudentsData();
+            var toppersData = await _academicController.GetTopStudentsData();
             // Asser
             Assert.Equal(toppersInfo, toppersData.Value);
         }
@@ -167,7 +166,7 @@ namespace SchoolSystem.Tests.Integration
                     studentBio.id
                 )).ReturnsAsync(admitedStudent);
             // Act
-            var admitedStudentData = await _academicsController.AdmitStudent(
+            var admitedStudentData = await _academicController.AdmitStudent(
                 studentBio.first_name,
                 studentBio.last_name,
                 studentBio.subject_01,
