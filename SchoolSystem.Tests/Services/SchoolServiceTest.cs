@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Moq;
 using SchoolSystem.Data.Helpers;
 using SchoolSystem.Data.Mappers;
+using SchoolSystem.Data.Models;
 using SchoolSystem.Services.Repositories.Interfaces;
 using SchoolSystem.Services.Services.Services;
 using Xunit;
+using Xunit.Sdk;
 
 namespace SchoolSystem.Tests.Services
 {
@@ -34,7 +37,7 @@ namespace SchoolSystem.Tests.Services
                 new AllStudentsInfoHelperDto {name = "Jhon Eashan", class_of = null, is_graduated = "Yes"},
             };
 
-            var StudentsFromDb = new List<AllStudentsInfoMapperDto>
+            var studentsFromDb = new List<AllStudentsInfoMapperDto>
             {
                 new AllStudentsInfoMapperDto
                     {first_name = "Rahat Shawon", last_name = "Eashan", class_of = 6, is_graduated = "No"},
@@ -44,7 +47,7 @@ namespace SchoolSystem.Tests.Services
                     {first_name = "Jhon", last_name = "Eashan", class_of = null, is_graduated = "Yes"}
             };
 
-            _mockRepo.Setup(s => s.GetStudentsFromDb()).ReturnsAsync(StudentsFromDb);
+            _mockRepo.Setup(s => s.GetStudentsFromDb()).ReturnsAsync(studentsFromDb);
 
             // Act
 
@@ -65,7 +68,7 @@ namespace SchoolSystem.Tests.Services
 
         // Testing GetStudentInfo(string firstName, string lastName)
         [Fact]
-        public async Task GetStudentInfo_ShouldReturn_GivenStudent()
+        public async Task GetStudentInfo_ShouldReturn_GivenStudentInfo()
         {
             // Arrange
             var expectedStudentInfo = new EnrolledStudentInfoHelperDto
@@ -96,6 +99,42 @@ namespace SchoolSystem.Tests.Services
             Assert.Equal(expectedStudentInfo.english_teacher, studentInfo.english_teacher);
             Assert.Equal(expectedStudentInfo.math_teacher, studentInfo.math_teacher);
             Assert.Equal(expectedStudentInfo.physics_teacher, studentInfo.physics_teacher);
+        }
+
+        // Testing GetClassInfo(int id)
+        [Fact]
+        public async Task GetClassInfo_ShouldReturn_GivenClassInfo()
+        {
+            // Arrange
+            var listOfTeachers = new List<TeacherInfoHelperDto>
+            {
+                new TeacherInfoHelperDto
+                    {first_name = "Rakib", last_name = "Rathor", address = "NA", subject = "English"},
+                new TeacherInfoHelperDto {first_name = "Kabir", last_name = "Khan", address = "NA", subject = "Math"},
+                new TeacherInfoHelperDto {first_name = "Rahat", last_name = "Khan", address = "NA", subject = "Physics"}
+            };
+
+            var expectedClassInfo = new ClassInfoHelperDto
+            {
+                Class = 6,
+                Teachers = listOfTeachers
+            };
+
+            var classFromDb = new ClassInfoMapperDto
+            {
+                id = 6,
+                ET_first_name = "Rakib", ET_last_name = "Rathor", ET_address = null, ET_subject = "English",
+                MT_first_name = "Kabir", MT_last_name = "Khan", MT_address = null, MT_subject = "Math",
+                PT_first_name = "Rahat", PT_last_name = "Khan", PT_address = null, PT_subject = "Physics"
+            };
+
+            _mockRepo.Setup(s => s.GetClassFromDb(classFromDb.id)).ReturnsAsync(classFromDb);
+            // Act
+            var classInfo = await _services.GetClassInfo(expectedClassInfo.Class);
+
+            // Assert
+            Assert.Equal(expectedClassInfo.Class, classInfo.Class);
+            Assert.Equal(expectedClassInfo.Teachers.GetType(), classInfo.Teachers.GetType());
         }
 
         // Testing GetToppersInfo
@@ -166,6 +205,36 @@ namespace SchoolSystem.Tests.Services
             Assert.Equal(expectedToppersInfo[2].First, toppersInfo[2].First);
             Assert.Equal(expectedToppersInfo[2].Second, toppersInfo[2].Second);
             Assert.Equal(expectedToppersInfo[2].Third, toppersInfo[2].Third);
+        }
+
+        // Testing Admission()
+        [Fact]
+        public async Task Admission_ShouldReturn_AdmitStatusInfo()
+        {
+            // Arrange
+            var newId = Guid.NewGuid();
+            var student = new Student
+            {
+                id = newId,
+                first_name = "Rahat Shawon",
+                last_name = "Eashan",
+                class_of = 10,
+                address = null,
+                subject_01 = "Math",
+                subject_02 = "English",
+                subject_03 = "Physics",
+            };
+            
+            var expectedResult = new AdmitSatusHelperDto{id = newId, name = $"{student.first_name} {student.last_name}", is_admited = true};
+
+            _mockRepo.Setup(s => s.AddStudentInfoToDb(student)).Returns(Task.CompletedTask);
+
+            // Act
+            var admission = await _services.Admission(student.first_name, student.last_name, student.subject_01,
+                student.subject_02, student.address, student.class_of, student.subject_03, student.id);
+            // Assert
+            Assert.Equal(expectedResult.id, admission.id);
+            
         }
     }
 }

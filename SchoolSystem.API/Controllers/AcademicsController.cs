@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SchoolSystem.Data.Helpers;
@@ -45,9 +46,9 @@ namespace SchoolSystem.API.Controllers
         
         [HttpPut("Admission")]
         public async Task<ActionResult<AdmitSatusHelperDto>> AdmitStudent(string firstName, string lastName, string subject01, string subject02, 
-            string subject03 = null, string address = null, int? classOf = null)
+            string subject03 = null, string address = null, int? classOf = null, Guid? id = null)
         {
-            return  await _services.Admission(firstName,lastName,subject01,subject02,address,classOf,subject03);
+            return await _services.Admission(firstName,lastName,subject01,subject02,address,classOf,subject03, id);
             
         }
 

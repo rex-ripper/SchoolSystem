@@ -115,10 +115,9 @@ namespace SchoolSystem.Services.Services.Services
         }
 
         public async Task<AdmitSatusHelperDto> Admission(string firstName, string lastName, string subject01,
-            string subject02,
-            string address = null, int? classOf = null, string subject03 = null)
+            string subject02, string address = null, int? classOf = null, string subject03 = null, Guid? id = null)
         {
-            var newId = Guid.NewGuid(); 
+            var newId = id ?? Guid.NewGuid(); 
             var isGraduated = classOf == null ? "Yes" : "No";
             var studentData = new Student
             {
@@ -132,7 +131,7 @@ namespace SchoolSystem.Services.Services.Services
                 subject_03 = subject03,
                 is_graduated = isGraduated
             };
-            await _repo.AddStudentInfoToDb(studentData).ConfigureAwait(false);
+            await _repo.AddStudentInfoToDb(studentData);
             return new AdmitSatusHelperDto {id = newId, name = $"{firstName} {lastName}", is_admited = true};
         }
     }
