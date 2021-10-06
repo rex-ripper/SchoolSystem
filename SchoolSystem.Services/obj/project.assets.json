@@ -1,0 +1,129 @@
+{
+  "version": 3,
+  "targets": {
+    "net5.0": {
+      "Dapper/2.0.90": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/Dapper.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/Dapper.dll": {}
+        }
+      },
+      "SchoolSystem.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/SchoolSystem.Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SchoolSystem.Data.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Dapper/2.0.90": {
+      "sha512": "e4YjOLJptnpwHIbP8HxjaYf7So9lhUC43rvvGMEkH4Q4CiVlm4rOxYDo0HyuHlMQKj0U5Ob/nCMm52TUhTaZQg==",
+      "type": "package",
+      "path": "dapper/2.0.90",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Dapper.png",
+        "dapper.2.0.90.nupkg.sha512",
+        "dapper.nuspec",
+        "lib/net461/Dapper.dll",
+        "lib/net461/Dapper.xml",
+        "lib/net5.0/Dapper.dll",
+        "lib/net5.0/Dapper.xml",
+        "lib/netstandard2.0/Dapper.dll",
+        "lib/netstandard2.0/Dapper.xml"
+      ]
+    },
+    "SchoolSystem.Data/1.0.0": {
+      "type": "project",
+      "path": "../SchoolSystem.Data/SchoolSystem.Data.csproj",
+      "msbuildProject": "../SchoolSystem.Data/SchoolSystem.Data.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net5.0": [
+      "Dapper >= 2.0.90",
+      "SchoolSystem.Data >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\rripp\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "F:\\Project\\Applications\\v3_SchoolSystem\\SchoolSystem\\SchoolSystem.Services\\SchoolSystem.Services.csproj",
+      "projectName": "SchoolSystem.Services",
+      "projectPath": "F:\\Project\\Applications\\v3_SchoolSystem\\SchoolSystem\\SchoolSystem.Services\\SchoolSystem.Services.csproj",
+      "packagesPath": "C:\\Users\\rripp\\.nuget\\packages\\",
+      "outputPath": "F:\\Project\\Applications\\v3_SchoolSystem\\SchoolSystem\\SchoolSystem.Services\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\rripp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net5.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "projectReferences": {
+            "F:\\Project\\Applications\\v3_SchoolSystem\\SchoolSystem\\SchoolSystem.Data\\SchoolSystem.Data.csproj": {
+              "projectPath": "F:\\Project\\Applications\\v3_SchoolSystem\\SchoolSystem\\SchoolSystem.Data\\SchoolSystem.Data.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net5.0": {
+        "targetAlias": "net5.0",
+        "dependencies": {
+          "Dapper": {
+            "target": "Package",
+            "version": "[2.0.90, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+F:\Project\Applications\v3_SchoolSystem\SchoolSystem\SchoolSystem.Data\bin\Debug\net5.0\SchoolSystem.Data.deps.json
+F:\Project\Applications\v3_SchoolSystem\SchoolSystem\SchoolSystem.Data\bin\Debug\net5.0\SchoolSystem.Data.dll
+F:\Project\Applications\v3_SchoolSystem\SchoolSystem\SchoolSystem.Data\bin\Debug\net5.0\ref\SchoolSystem.Data.dll
+F:\Project\Applications\v3_SchoolSystem\SchoolSystem\SchoolSystem.Data\bin\Debug\net5.0\SchoolSystem.Data.pdb
+F:\Project\Applications\v3_SchoolSystem\SchoolSystem\SchoolSystem.Data\obj\Debug\net5.0\SchoolSystem.Data.csproj.AssemblyReference.cache
+F:\Project\Applications\v3_SchoolSystem\SchoolSystem\SchoolSystem.Data\obj\Debug\net5.0\SchoolSystem.Data.GeneratedMSBuildEditorConfig.editorconfig
+F:\Project\Applications\v3_SchoolSystem\SchoolSystem\SchoolSystem.Data\obj\Debug\net5.0\SchoolSystem.Data.AssemblyInfoInputs.cache
+F:\Project\Applications\v3_SchoolSystem\SchoolSystem\SchoolSystem.Data\obj\Debug\net5.0\SchoolSystem.Data.AssemblyInfo.cs
+F:\Project\Applications\v3_SchoolSystem\SchoolSystem\SchoolSystem.Data\obj\Debug\net5.0\SchoolSystem.Data.csproj.CoreCompileInputs.cache
+F:\Project\Applications\v3_SchoolSystem\SchoolSystem\SchoolSystem.Data\obj\Debug\net5.0\SchoolSystem.Data.dll
+F:\Project\Applications\v3_SchoolSystem\SchoolSystem\SchoolSystem.Data\obj\Debug\net5.0\ref\SchoolSystem.Data.dll
+F:\Project\Applications\v3_SchoolSystem\SchoolSystem\SchoolSystem.Data\obj\Debug\net5.0\SchoolSystem.Data.pdb

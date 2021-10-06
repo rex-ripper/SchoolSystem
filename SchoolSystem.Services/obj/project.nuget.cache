@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "72gzWTAou0fyKLOrikTZM49jRqc5NBHtE79SPtqsnccJj7QkK4rh815PaK01guyGLWPcuPcsI5E1zmuVKlSrnQ==",
+  "success": true,
+  "projectFilePath": "F:\\Project\\Applications\\v3_SchoolSystem\\SchoolSystem\\SchoolSystem.Services\\SchoolSystem.Services.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\rripp\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512"
+  ],
+  "logs": []
+}
