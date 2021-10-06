@@ -1,4 +1,4 @@
-**Create a Postgre User With **
+**Create a Postgre User With**
 
 user id = SchoolSys;
 password = SchoolSys;
