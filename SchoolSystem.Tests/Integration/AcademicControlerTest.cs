@@ -147,12 +147,14 @@ namespace SchoolSystem.Tests.Integration
                 subject_02 = "English",
                 subject_03 = "Physics",
             };
+            
             var admitedStudent = new AdmitSatusHelperDto
             {
                 id = newId,
                 name = $"{studentBio.first_name} {studentBio.last_name}",
                 is_admited = true
             };
+            
             _mockServices.Setup(s => s
                 .Admission(
                     studentBio.first_name,
@@ -161,7 +163,8 @@ namespace SchoolSystem.Tests.Integration
                     studentBio.subject_02,
                     studentBio.address,
                     studentBio.class_of,
-                    studentBio.subject_03
+                    studentBio.subject_03,
+                    studentBio.id
                 )).ReturnsAsync(admitedStudent);
             // Act
             var admitedStudentData = await _academicsController.AdmitStudent(
@@ -171,9 +174,10 @@ namespace SchoolSystem.Tests.Integration
                 studentBio.subject_02,
                 studentBio.subject_03,
                 studentBio.address,
-                studentBio.class_of);
+                studentBio.class_of,
+                studentBio.id);
 
-            // Asser
+            // Assert
             Assert.Equal(admitedStudent, admitedStudentData.Value);
         }
     }
