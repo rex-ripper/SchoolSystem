@@ -1,19 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using FluentMigrator.Runner;
 using System.Reflection;
 using System.Data;
+using Newtonsoft.Json.Serialization;
 using SchoolSystem.Services.Repositories.Interfaces;
 using SchoolSystem.Services.Repositories.Repositories;
 using Npgsql;
@@ -25,6 +19,7 @@ namespace SchoolSystem.API
     public class Startup
     {
         private readonly IConfiguration _config;
+
         public Startup(IConfiguration config)
         {
             _config = config;
@@ -41,18 +36,24 @@ namespace SchoolSystem.API
 
             services.AddScoped<ISchoolServices, SchoolServices>();
             services.AddScoped<ISchoolRepository, SchoolRepository>();
-            
+
 
             services.AddControllers();
 
             services.AddFluentMigratorCore().ConfigureRunner(c => c
-            .AddPostgres()
-            .WithGlobalConnectionString("DefaultConnection")
-            .ScanIn(Assembly.Load("SchoolSystem.Migrations")).For.All())
-            .AddLogging(c => c.AddFluentMigratorConsole());
+                    .AddPostgres()
+                    .WithGlobalConnectionString("DefaultConnection")
+                    .ScanIn(Assembly.Load("SchoolSystem.Migrations")).For.All())
+                .AddLogging(c => c.AddFluentMigratorConsole());
+
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(c =>
+                    c.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+                .AddNewtonsoftJson(o => o.SerializerSettings.ContractResolver = new DefaultContractResolver());
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SchoolSystem.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "SchoolSystem.API", Version = "v1"});
             });
         }
 
@@ -72,10 +73,7 @@ namespace SchoolSystem.API
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
 
             using var scope = app.ApplicationServices.CreateScope();

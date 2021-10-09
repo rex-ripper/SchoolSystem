@@ -5,8 +5,8 @@ namespace SchoolSystem.Data.Helpers
         public string Name { get; set; }   
         public string Subjects { get; set; }    
         public int? Class { get; set; }
-        public string english_teacher { get; set; }
-        public string math_teacher { get; set; }
-        public string physics_teacher { get; set; }               
+        public string EnglishTeacher { get; set; }
+        public string MathTeacher { get; set; }
+        public string PhysicsTeacher { get; set; }               
     }
 }

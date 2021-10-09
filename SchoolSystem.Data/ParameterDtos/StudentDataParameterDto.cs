@@ -1,8 +1,8 @@
-﻿namespace SchoolSystem.Data.ProcessorDtos
+﻿namespace SchoolSystem.Data.ParameterDtos
 {
-    public class StudentDataProcessorDto_
+    public class StudentDataParameterDto
     {
-        public string firstName { get; set; }
-        public string lastName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

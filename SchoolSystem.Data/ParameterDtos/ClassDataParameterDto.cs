@@ -1,6 +1,6 @@
-﻿namespace SchoolSystem.Data.ProcessorDtos
+﻿namespace SchoolSystem.Data.ParameterDtos
 {
-    public class ClassDataProcessorDto
+    public class ClassDataParameterDto
     {
         public int Class { get; set; }
     }

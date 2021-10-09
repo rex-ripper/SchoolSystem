@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SchoolSystem.Data.Helpers;
+using SchoolSystem.Data.ParameterDtos;
 using SchoolSystem.Services.Services.Interfaces;
 
 namespace SchoolSystem.API.Controllers
@@ -25,16 +26,16 @@ namespace SchoolSystem.API.Controllers
             return await _services.GetStudentsInfo();
         }
 
-        [HttpGet("StudentI")]
-        public async Task<ActionResult<EnrolledStudentInfoHelperDto>> GetStudentData(string firstName, string lastName)
+        [HttpGet("Student")]
+        public async Task<ActionResult<EnrolledStudentInfoHelperDto>> GetStudentData(StudentDataParameterDto student)
         {
-            return await _services.GetStudentInfo(firstName, lastName);
+            return await _services.GetStudentInfo(student.FirstName, student.LastName);
         }
 
-        [HttpGet("Classes")]
-        public async Task<ActionResult<ClassInfoHelperDto>> GetClassData(int id)
+        [HttpGet("Class")]
+        public async Task<ActionResult<ClassInfoHelperDto>> GetClassData(ClassDataParameterDto className)
         {
-            return  await _services.GetClassInfo(id );
+            return  await _services.GetClassInfo(className.Class );
         }
 
              
@@ -45,10 +46,9 @@ namespace SchoolSystem.API.Controllers
         }
         
         [HttpPut("Admission")]
-        public async Task<ActionResult<AdmitSatusHelperDto>> AdmitStudent(string firstName, string lastName, string subject01, string subject02, 
-            string subject03 = null, string address = null, int? classOf = null, Guid? id = null)
+        public async Task<ActionResult<AdmitSatusHelperDto>> AdmitStudent(AdmitStudentParameterDto student)
         {
-            return await _services.Admission(firstName,lastName,subject01,subject02,address,classOf,subject03, id);
+            return await _services.Admission(student.FirstName,student.LastName,student.Subject01,student.Subject02,student.Address,student.Class,student.FirstName, student.Id);
             
         }
 

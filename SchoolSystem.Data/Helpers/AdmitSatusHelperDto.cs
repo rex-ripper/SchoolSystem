@@ -4,8 +4,8 @@ namespace SchoolSystem.Data.Helpers
 {
     public class AdmitSatusHelperDto
     {
-        public Guid id { get; set; }
-        public string name { get; set; }
-        public bool is_admited { get; set; }
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public bool isAdmite { get; set; }
     }
 }
