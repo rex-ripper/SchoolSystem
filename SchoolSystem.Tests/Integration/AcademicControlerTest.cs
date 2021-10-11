@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.OpenApi.Validations;
 using Moq;
 using SchoolSystem.API.Controllers;
 using SchoolSystem.Data.Helpers;
 using SchoolSystem.Data.Models;
+using SchoolSystem.Data.ParameterDtos;
 using SchoolSystem.Services.Services.Interfaces;
 using Xunit;
 
@@ -13,13 +13,13 @@ namespace SchoolSystem.Tests.Integration
 {
     public class AcademicControlerTest
     {
-        private readonly AcademicController _academicsController;
+        private readonly AcademicController _academicController;
         private readonly Mock<ISchoolServices> _mockServices = new Mock<ISchoolServices>();
 
 
         public AcademicControlerTest()
         {
-            _academicsController = new AcademicController(_mockServices.Object);
+            _academicController = new AcademicController(_mockServices.Object);
         }
 
         // TestSessionInfo GetStudentsData
@@ -29,16 +29,16 @@ namespace SchoolSystem.Tests.Integration
             // Arrange
             var studentsInfo = new List<AllStudentsInfoHelperDto>
             {
-                new AllStudentsInfoHelperDto {name = "Rahat Shawon Eashan", class_of = 6, is_graduated = "No"},
-                new AllStudentsInfoHelperDto {name = "David Baker", class_of = 7, is_graduated = "No"},
-                new AllStudentsInfoHelperDto {name = "Jhon Eashan", class_of = null, is_graduated = "Yes"}
+                new AllStudentsInfoHelperDto {Name = "Rahat Shawon Eashan", ClassOf = 6, IsGraduated = "No"},
+                new AllStudentsInfoHelperDto {Name = "David Baker", ClassOf = 7, IsGraduated = "No"},
+                new AllStudentsInfoHelperDto {Name = "Jhon Eashan", ClassOf = null, IsGraduated = "Yes"}
             };
 
             _mockServices.Setup(s => s.GetStudentsInfo()).ReturnsAsync(studentsInfo);
 
             // Act
 
-            var getStudentsData = await _academicsController.GetStudentsData();
+            var getStudentsData = await _academicController.GetStudentsData();
 
             // Assert
 
@@ -53,13 +53,14 @@ namespace SchoolSystem.Tests.Integration
 
             var firstName = "Rahat";
             var lastName = "Shawon";
+            var studentParam = new StudentDataParameterDto {FirstName = firstName, LastName = lastName};
             var student = new EnrolledStudentInfoHelperDto
             {
                 Name = $"{firstName} {lastName}",
-                english_teacher = "MockEnglishTeacher",
-                math_teacher = "MockMathTeacher",
-                physics_teacher = null,
-                Class = 6,
+                EnglishTeacher = "MockEnglishTeacher",
+                MathTeacher = "MockMathTeacher",
+                PhysicsTeacher = null,
+                ClassOf = 6,
                 Subjects = "Math,English"
             };
 
@@ -67,7 +68,7 @@ namespace SchoolSystem.Tests.Integration
 
             // ACT
 
-            var getStudentData = await _academicsController.GetStudentData(firstName, lastName);
+            var getStudentData = await _academicController.GetStudentData(studentParam);
 
             // Assert
 
@@ -79,22 +80,22 @@ namespace SchoolSystem.Tests.Integration
         public async Task GetClassData_ShouldReturn_GivenClassData()
         {
             // Arrange
-            var teachers = new List<TeacherInfoHelperDto>
-            {
-                new TeacherInfoHelperDto
-                    {first_name = "Rahat", last_name = "Zaman", address = null, subject = "English"},
-                new TeacherInfoHelperDto {first_name = "Rex", last_name = "Shown", address = null, subject = "Physics"},
-                new TeacherInfoHelperDto {first_name = "Rex", last_name = "Ripper", address = null, subject = "Math"}
-            };
+            var englishTeacher = "Rahat Zaman";
+            var mathTeacher = "Rex Shawon";
+            var physicsTeacher = "Rex Ripper";
+
 
             var classInfo = new ClassInfoHelperDto
-                {Class = 6, Teachers = teachers};
+            {
+                ClassOf = 6, EnglishTeacher = englishTeacher, MathTeacher = mathTeacher, PhysicsTeacher = physicsTeacher
+            };
+            var classDataParameter = new ClassDataParameterDto {ClassOf = classInfo.ClassOf};
 
-            _mockServices.Setup(s => s.GetClassInfo(classInfo.Class)).ReturnsAsync(classInfo);
+            _mockServices.Setup(s => s.GetClassInfo(classInfo.ClassOf)).ReturnsAsync(classInfo);
 
             // Act
 
-            var result = await _academicsController.GetClassData(classInfo.Class);
+            var result = await _academicController.GetClassData(classDataParameter);
 
             // Assert
 
@@ -110,23 +111,23 @@ namespace SchoolSystem.Tests.Integration
             {
                 new TopStudentInfoHelperDto()
                 {
-                    Class_Of = 6,
+                    ClassOf = 6,
                     First = "Raju Rastogi", Second = "Farhan Kabir", Third = "Rex Ripper"
                 },
                 new TopStudentInfoHelperDto()
                 {
-                    Class_Of = 7,
+                    ClassOf = 7,
                     First = "Farhan Rastogi", Second = "Rex Kabir", Third = "Raju Ripper"
                 },
                 new TopStudentInfoHelperDto()
                 {
-                    Class_Of = 8,
+                    ClassOf = 8,
                     First = "Farhan Rastogi", Second = "Rex Kabir", Third = "Raju Ripper"
                 },
             };
             _mockServices.Setup(s => s.GetToppersInfo()).ReturnsAsync(toppersInfo);
             // Act
-            var toppersData = await _academicsController.GetTopStudentsData();
+            var toppersData = await _academicController.GetTopStudentsData();
             // Asser
             Assert.Equal(toppersInfo, toppersData.Value);
         }
@@ -137,7 +138,7 @@ namespace SchoolSystem.Tests.Integration
         {
             // Arrange
             var newId = Guid.NewGuid();
-            var studentBio = new Student
+            var studentBio = new Student()
             {
                 id = newId,
                 first_name = "Rayhan",
@@ -145,16 +146,26 @@ namespace SchoolSystem.Tests.Integration
                 class_of = 6,
                 subject_01 = "Math",
                 subject_02 = "English",
-                subject_03 = "Physics",
+                subject_03 = "Physics"
             };
-            
+            var admitStudentParameterDto = new AdmitStudentParameterDto
+            {
+                Id = studentBio.id,
+                FirstName = studentBio.first_name,
+                LastName = studentBio.last_name,
+                ClassOf = studentBio.class_of,
+                Subject01 = studentBio.subject_01,
+                Subject02 = studentBio.subject_02,
+                Subject03 = studentBio.subject_03
+            };
+
             var admitedStudent = new AdmitSatusHelperDto
             {
-                id = newId,
-                name = $"{studentBio.first_name} {studentBio.last_name}",
-                is_admited = true
+                Id = newId,
+                Name = $"{studentBio.first_name} {studentBio.last_name}",
+                IsAdmitted = "Yes"
             };
-            
+
             _mockServices.Setup(s => s
                 .Admission(
                     studentBio.first_name,
@@ -167,18 +178,10 @@ namespace SchoolSystem.Tests.Integration
                     studentBio.id
                 )).ReturnsAsync(admitedStudent);
             // Act
-            var admitedStudentData = await _academicsController.AdmitStudent(
-                studentBio.first_name,
-                studentBio.last_name,
-                studentBio.subject_01,
-                studentBio.subject_02,
-                studentBio.subject_03,
-                studentBio.address,
-                studentBio.class_of,
-                studentBio.id);
+            var admitedStudentData = await _academicController.AdmitStudent(admitStudentParameterDto);
 
             // Assert
-            Assert.Equal(admitedStudent, admitedStudentData.Value);
+            Assert.Equal(admitedStudent.Id, admitedStudentData.Value.Id);
         }
     }
 }

@@ -32,9 +32,9 @@ namespace SchoolSystem.Tests.Services
 
             var expectedStudentsInfo = new List<AllStudentsInfoHelperDto>
             {
-                new AllStudentsInfoHelperDto {name = "Rahat Shawon Eashan", class_of = 6, is_graduated = "No"},
-                new AllStudentsInfoHelperDto {name = "David Baker", class_of = 7, is_graduated = "No"},
-                new AllStudentsInfoHelperDto {name = "Jhon Eashan", class_of = null, is_graduated = "Yes"},
+                new AllStudentsInfoHelperDto {Name = "Rahat Shawon Eashan", ClassOf = 6, IsGraduated = "No"},
+                new AllStudentsInfoHelperDto {Name = "David Baker", ClassOf = 7, IsGraduated = "No"},
+                new AllStudentsInfoHelperDto {Name = "Jhon Eashan", ClassOf = null, IsGraduated = "Yes"},
             };
 
             var studentsFromDb = new List<AllStudentsInfoMapperDto>
@@ -55,15 +55,15 @@ namespace SchoolSystem.Tests.Services
 
             // Assert
 
-            Assert.Equal(expectedStudentsInfo[0].name, studentInfo[0].name);
-            Assert.Equal(expectedStudentsInfo[0].class_of, studentInfo[0].class_of);
-            Assert.Equal(expectedStudentsInfo[0].is_graduated, studentInfo[0].is_graduated);
-            Assert.Equal(expectedStudentsInfo[1].name, studentInfo[1].name);
-            Assert.Equal(expectedStudentsInfo[1].class_of, studentInfo[1].class_of);
-            Assert.Equal(expectedStudentsInfo[1].is_graduated, studentInfo[1].is_graduated);
-            Assert.Equal(expectedStudentsInfo[2].name, studentInfo[2].name);
-            Assert.Equal(expectedStudentsInfo[2].class_of, studentInfo[2].class_of);
-            Assert.Equal(expectedStudentsInfo[2].is_graduated, studentInfo[2].is_graduated);
+            Assert.Equal(expectedStudentsInfo[0].Name, studentInfo[0].Name);
+            Assert.Equal(expectedStudentsInfo[0].ClassOf, studentInfo[0].ClassOf);
+            Assert.Equal(expectedStudentsInfo[0].IsGraduated, studentInfo[0].IsGraduated);
+            Assert.Equal(expectedStudentsInfo[1].Name, studentInfo[1].Name);
+            Assert.Equal(expectedStudentsInfo[1].ClassOf, studentInfo[1].ClassOf);
+            Assert.Equal(expectedStudentsInfo[1].IsGraduated, studentInfo[1].IsGraduated);
+            Assert.Equal(expectedStudentsInfo[2].Name, studentInfo[2].Name);
+            Assert.Equal(expectedStudentsInfo[2].ClassOf, studentInfo[2].ClassOf);
+            Assert.Equal(expectedStudentsInfo[2].IsGraduated, studentInfo[2].IsGraduated);
         }
 
         // Testing GetStudentInfo(string firstName, string lastName)
@@ -74,11 +74,11 @@ namespace SchoolSystem.Tests.Services
             var expectedStudentInfo = new EnrolledStudentInfoHelperDto
             {
                 Name = "Rahat Shawon Eashan",
-                Class = 6,
+                ClassOf = 6,
                 Subjects = "English, Math, Physics",
-                english_teacher = "SRM Khan",
-                math_teacher = "Roddur Roy",
-                physics_teacher = "Raju Ahmed"
+                EnglishTeacher = "SRM Khan",
+                MathTeacher = "Roddur Roy",
+                PhysicsTeacher = "Raju Ahmed"
             };
             var studentFromDb = new StudentInfoMapperDto
             {
@@ -96,9 +96,9 @@ namespace SchoolSystem.Tests.Services
             // Assert
             Assert.Equal(expectedStudentInfo.Name, studentInfo.Name);
             Assert.Equal(expectedStudentInfo.Subjects, studentInfo.Subjects);
-            Assert.Equal(expectedStudentInfo.english_teacher, studentInfo.english_teacher);
-            Assert.Equal(expectedStudentInfo.math_teacher, studentInfo.math_teacher);
-            Assert.Equal(expectedStudentInfo.physics_teacher, studentInfo.physics_teacher);
+            Assert.Equal(expectedStudentInfo.EnglishTeacher, studentInfo.EnglishTeacher);
+            Assert.Equal(expectedStudentInfo.MathTeacher, studentInfo.MathTeacher);
+            Assert.Equal(expectedStudentInfo.PhysicsTeacher, studentInfo.PhysicsTeacher);
         }
 
         // Testing GetClassInfo(int id)
@@ -106,35 +106,30 @@ namespace SchoolSystem.Tests.Services
         public async Task GetClassInfo_ShouldReturn_GivenClassInfo()
         {
             // Arrange
-            var listOfTeachers = new List<TeacherInfoHelperDto>
-            {
-                new TeacherInfoHelperDto
-                    {first_name = "Rakib", last_name = "Rathor", address = "NA", subject = "English"},
-                new TeacherInfoHelperDto {first_name = "Kabir", last_name = "Khan", address = "NA", subject = "Math"},
-                new TeacherInfoHelperDto {first_name = "Rahat", last_name = "Khan", address = "NA", subject = "Physics"}
-            };
+            var englishTeacher = "Rahat Zaman";
+            var mathTeacher = "Rex Shawon";
+            var physicsTeacher = "Rex Ripper";
+
 
             var expectedClassInfo = new ClassInfoHelperDto
             {
-                Class = 6,
-                Teachers = listOfTeachers
+                ClassOf = 6, EnglishTeacher = englishTeacher, MathTeacher = mathTeacher, PhysicsTeacher = physicsTeacher
             };
 
             var classFromDb = new ClassInfoMapperDto
             {
                 id = 6,
-                ET_first_name = "Rakib", ET_last_name = "Rathor", ET_address = null, ET_subject = "English",
-                MT_first_name = "Kabir", MT_last_name = "Khan", MT_address = null, MT_subject = "Math",
-                PT_first_name = "Rahat", PT_last_name = "Khan", PT_address = null, PT_subject = "Physics"
+                ET_first_name = "Rakib", ET_last_name = "Rathor",
+                MT_first_name = "Kabir", MT_last_name = "Khan",
+                PT_first_name = "Rahat", PT_last_name = "Khan",
             };
 
             _mockRepo.Setup(s => s.GetClassFromDb(classFromDb.id)).ReturnsAsync(classFromDb);
             // Act
-            var classInfo = await _services.GetClassInfo(expectedClassInfo.Class);
+            var classInfo = await _services.GetClassInfo(expectedClassInfo.ClassOf);
 
             // Assert
-            Assert.Equal(expectedClassInfo.Class, classInfo.Class);
-            Assert.Equal(expectedClassInfo.Teachers.GetType(), classInfo.Teachers.GetType());
+            Assert.Equal(expectedClassInfo.ClassOf, classInfo.ClassOf);
         }
 
         // Testing GetToppersInfo
@@ -172,17 +167,17 @@ namespace SchoolSystem.Tests.Services
             {
                 new TopStudentInfoHelperDto()
                 {
-                    Class_Of = 6,
+                    ClassOf = 6,
                     First = "Raju Rastogi", Second = "Farhan Kabir", Third = "Rex Ripper"
                 },
                 new TopStudentInfoHelperDto()
                 {
-                    Class_Of = 7,
+                    ClassOf = 7,
                     First = "Farhan Rastogi", Second = "Rex Kabir", Third = "Raju Ripper"
                 },
                 new TopStudentInfoHelperDto()
                 {
-                    Class_Of = 8,
+                    ClassOf = 8,
                     First = "Farhan Rastogi", Second = "Rex Kabir", Third = "Raju Ripper"
                 },
             };
@@ -193,15 +188,15 @@ namespace SchoolSystem.Tests.Services
             var toppersInfo = (await _services.GetToppersInfo());
 
             // Assert
-            Assert.Equal(expectedToppersInfo[0].Class_Of, toppersInfo[0].Class_Of);
+            Assert.Equal(expectedToppersInfo[0].ClassOf, toppersInfo[0].ClassOf);
             Assert.Equal(expectedToppersInfo[0].First, toppersInfo[0].First);
             Assert.Equal(expectedToppersInfo[0].Second, toppersInfo[0].Second);
             Assert.Equal(expectedToppersInfo[0].Third, toppersInfo[0].Third);
-            Assert.Equal(expectedToppersInfo[1].Class_Of, toppersInfo[1].Class_Of);
+            Assert.Equal(expectedToppersInfo[1].ClassOf, toppersInfo[1].ClassOf);
             Assert.Equal(expectedToppersInfo[1].First, toppersInfo[1].First);
             Assert.Equal(expectedToppersInfo[1].Second, toppersInfo[1].Second);
             Assert.Equal(expectedToppersInfo[1].Third, toppersInfo[1].Third);
-            Assert.Equal(expectedToppersInfo[2].Class_Of, toppersInfo[2].Class_Of);
+            Assert.Equal(expectedToppersInfo[2].ClassOf, toppersInfo[2].ClassOf);
             Assert.Equal(expectedToppersInfo[2].First, toppersInfo[2].First);
             Assert.Equal(expectedToppersInfo[2].Second, toppersInfo[2].Second);
             Assert.Equal(expectedToppersInfo[2].Third, toppersInfo[2].Third);
@@ -224,8 +219,9 @@ namespace SchoolSystem.Tests.Services
                 subject_02 = "English",
                 subject_03 = "Physics",
             };
-            
-            var expectedResult = new AdmitSatusHelperDto{id = newId, name = $"{student.first_name} {student.last_name}", is_admited = true};
+
+            var expectedResult = new AdmitSatusHelperDto
+                {Id = newId, Name = $"{student.first_name} {student.last_name}", IsAdmitted = "Has been admitted"};
 
             _mockRepo.Setup(s => s.AddStudentInfoToDb(student)).Returns(Task.CompletedTask);
 
@@ -233,8 +229,7 @@ namespace SchoolSystem.Tests.Services
             var admission = await _services.Admission(student.first_name, student.last_name, student.subject_01,
                 student.subject_02, student.address, student.class_of, student.subject_03, student.id);
             // Assert
-            Assert.Equal(expectedResult.id, admission.id);
-            
+            Assert.Equal(expectedResult.Id, admission.Id);
         }
     }
 }

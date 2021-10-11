@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "y0oHIco5V/ychjYfu53n13NaDuiAmVou6UY94ttWp1xARh9Iho7GbLDyU7TR2WG7if0PzlWg/3iy9xhnbl3R9g==",
+  "dgSpecHash": "w9qa2hTQMPbHTbSvkbsdxVE24f5EBm0XqvXUci44ilKwz1UNO89UxbGBpTDsMLbQRE4SLojgA6V2kPizoDguRw==",
   "success": true,
   "projectFilePath": "F:\\Project\\Applications\\v3_SchoolSystem\\SchoolSystem\\SchoolSystem.API\\SchoolSystem.API.csproj",
   "expectedPackageFiles": [
@@ -24,7 +24,9 @@
     "C:\\Users\\rripp\\.nuget\\packages\\fluentmigrator.runner.sqlite\\3.3.1\\fluentmigrator.runner.sqlite.3.3.1.nupkg.sha512",
     "C:\\Users\\rripp\\.nuget\\packages\\fluentmigrator.runner.sqlserver\\3.3.1\\fluentmigrator.runner.sqlserver.3.3.1.nupkg.sha512",
     "C:\\Users\\rripp\\.nuget\\packages\\fluentmigrator.runner.sqlserverce\\3.3.1\\fluentmigrator.runner.sqlserverce.3.3.1.nupkg.sha512",
-    "C:\\Users\\rripp\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\rripp\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\5.0.10\\microsoft.aspnetcore.jsonpatch.5.0.10.nupkg.sha512",
+    "C:\\Users\\rripp\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\5.0.10\\microsoft.aspnetcore.mvc.newtonsoftjson.5.0.10.nupkg.sha512",
+    "C:\\Users\\rripp\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\rripp\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.2\\microsoft.data.sqlclient.2.1.2.nupkg.sha512",
     "C:\\Users\\rripp\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
     "C:\\Users\\rripp\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
@@ -45,6 +47,8 @@
     "C:\\Users\\rripp\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\rripp\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\rripp\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\rripp\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
+    "C:\\Users\\rripp\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "C:\\Users\\rripp\\.nuget\\packages\\npgsql\\5.0.10\\npgsql.5.0.10.nupkg.sha512",
     "C:\\Users\\rripp\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
     "C:\\Users\\rripp\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SchoolSystem.Data.Helpers;
+using SchoolSystem.Data.ParameterDtos;
 using SchoolSystem.Services.Services.Interfaces;
 
 namespace SchoolSystem.API.Controllers
@@ -25,16 +26,16 @@ namespace SchoolSystem.API.Controllers
             return await _services.GetStudentsInfo();
         }
 
-        [HttpGet("StudentInfo/{firstName}_{lastName}")]
-        public async Task<ActionResult<EnrolledStudentInfoHelperDto>> GetStudentData(string firstName, string lastName)
+        [HttpPost("Student")]
+        public async Task<ActionResult<EnrolledStudentInfoHelperDto>> GetStudentData(StudentDataParameterDto student)
         {
-            return await _services.GetStudentInfo(firstName, lastName);
+            return await _services.GetStudentInfo(student.FirstName, student.LastName);
         }
 
-        [HttpGet("Classes/{id}")]
-        public async Task<ActionResult<ClassInfoHelperDto>> GetClassData(int id)
+        [HttpPost("Class")]
+        public async Task<ActionResult<ClassInfoHelperDto>> GetClassData(ClassDataParameterDto className)
         {
-            return  await _services.GetClassInfo(id );
+            return  await _services.GetClassInfo(className.ClassOf );
         }
 
              
@@ -44,11 +45,10 @@ namespace SchoolSystem.API.Controllers
             return await _services.GetToppersInfo();
         }
         
-        [HttpPut("Admission")]
-        public async Task<ActionResult<AdmitSatusHelperDto>> AdmitStudent(string firstName, string lastName, string subject01, string subject02, 
-            string subject03 = null, string address = null, int? classOf = null, Guid? id = null)
+        [HttpPost("Admission")]
+        public async Task<ActionResult<AdmitSatusHelperDto>> AdmitStudent(AdmitStudentParameterDto student)
         {
-            return await _services.Admission(firstName,lastName,subject01,subject02,address,classOf,subject03, id);
+            return await _services.Admission(student.FirstName,student.LastName,student.Subject01,student.Subject02,student.Address,student.ClassOf,student.Subject03, student.Id);
             
         }
 
