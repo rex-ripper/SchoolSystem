@@ -28,9 +28,9 @@ namespace SchoolSystem.Services.Repositories.Repositories
         public async Task<ClassInfoMapperDto> GetClassFromDb(int id)
         {
             var sql = @$"SELECT C.id, 
-                         MT.first_name AS MT_first_name, MT.last_name AS MT_last_name, MT.address AS MT_address, MT.subject_name AS MT_subject,
-                         PT.first_name AS PT_first_name, PT.last_name AS PT_last_name, PT.address AS PT_address, PT.subject_name AS PT_subject,
-                         ET.first_name AS ET_first_name, ET.last_name AS ET_last_name, ET.address AS ET_address, ET.subject_name AS ET_subject
+                         MT.first_name AS MT_first_name, MT.last_name AS MT_last_name, 
+                         PT.first_name AS PT_first_name, PT.last_name AS PT_last_name, 
+                         ET.first_name AS ET_first_name, ET.last_name AS ET_last_name
                          FROM classes AS C
                          INNER JOIN teachers AS MT ON C.math_teacher_id = MT.id
                          INNER JOIN teachers AS PT ON C.physics_teacher_id = PT.id

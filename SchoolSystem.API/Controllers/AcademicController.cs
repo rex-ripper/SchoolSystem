@@ -26,16 +26,16 @@ namespace SchoolSystem.API.Controllers
             return await _services.GetStudentsInfo();
         }
 
-        [HttpGet("Student")]
+        [HttpPost("Student")]
         public async Task<ActionResult<EnrolledStudentInfoHelperDto>> GetStudentData(StudentDataParameterDto student)
         {
             return await _services.GetStudentInfo(student.FirstName, student.LastName);
         }
 
-        [HttpGet("Class")]
+        [HttpPost("Class")]
         public async Task<ActionResult<ClassInfoHelperDto>> GetClassData(ClassDataParameterDto className)
         {
-            return  await _services.GetClassInfo(className.Class );
+            return  await _services.GetClassInfo(className.ClassOf );
         }
 
              
@@ -45,10 +45,10 @@ namespace SchoolSystem.API.Controllers
             return await _services.GetToppersInfo();
         }
         
-        [HttpPut("Admission")]
+        [HttpPost("Admission")]
         public async Task<ActionResult<AdmitSatusHelperDto>> AdmitStudent(AdmitStudentParameterDto student)
         {
-            return await _services.Admission(student.FirstName,student.LastName,student.Subject01,student.Subject02,student.Address,student.Class,student.FirstName, student.Id);
+            return await _services.Admission(student.FirstName,student.LastName,student.Subject01,student.Subject02,student.Address,student.ClassOf,student.Subject03, student.Id);
             
         }
 

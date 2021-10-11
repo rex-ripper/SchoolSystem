@@ -24,7 +24,7 @@ namespace SchoolSystem.Services.Services.Services
 
             return studentsFromDb.Select(item => new AllStudentsInfoHelperDto
             {
-                Name = $"{item.first_name} {item.last_name}", Class = item.class_of, IsGraduated = item.is_graduated
+               Id = item.id, Name = $"{item.first_name} {item.last_name}", ClassOf = item.class_of, IsGraduated = item.is_graduated
 
             }).ToList();
         }
@@ -32,34 +32,13 @@ namespace SchoolSystem.Services.Services.Services
         public async Task<ClassInfoHelperDto> GetClassInfo(int id)
         {
             var classFromDb = await _repo.GetClassFromDb(id);
-            var englishTeacher = new TeacherInfoHelperDto
-            {
-                FirstName = classFromDb.ET_first_name,
-                LastName = classFromDb.ET_last_name,
-                Address = classFromDb.ET_address ?? "NA",
-                Subject = classFromDb.ET_subject
-
-            };
-            var mathTeacher = new TeacherInfoHelperDto
-            {
-                FirstName = classFromDb.MT_first_name,
-                LastName = classFromDb.MT_last_name,
-                Address = classFromDb.MT_address ?? "NA",
-                Subject = classFromDb.MT_subject
-
-            };
-            var physicsTeacher = new TeacherInfoHelperDto
-            {
-                FirstName = classFromDb.PT_first_name,
-                LastName = classFromDb.PT_last_name,
-                Address = classFromDb.PT_address ?? "NA",
-                Subject = classFromDb.PT_subject
-
-            };
             var classInfo = new ClassInfoHelperDto
             {
-                Class = classFromDb.id,
-                Teachers = new List<TeacherInfoHelperDto> {englishTeacher, mathTeacher, physicsTeacher}
+                ClassOf = classFromDb.id,
+                EnglishTeacher = $"{classFromDb.ET_first_name} {classFromDb.ET_last_name}",
+                MathTeacher = $"{classFromDb.MT_first_name} {classFromDb.MT_last_name}",
+                PhysicsTeacher = $"{classFromDb.PT_first_name} {classFromDb.PT_last_name}"
+
             };
 
             return classInfo;
@@ -105,7 +84,7 @@ namespace SchoolSystem.Services.Services.Services
             var studentInfo = new EnrolledStudentInfoHelperDto
             {
                 Name = $"{studentFromDb.s_first_name} {studentFromDb.s_last_name}",
-                Class = studentFromDb.s_class_of,
+                ClassOf = studentFromDb.s_class_of,
                 Subjects = string.Join(", ", subjects),
                 EnglishTeacher = englishTeacher,
                 MathTeacher = mathTeacher,
@@ -132,7 +111,8 @@ namespace SchoolSystem.Services.Services.Services
                 is_graduated = isGraduated
             };
             await _repo.AddStudentInfoToDb(studentData);
-            return new AdmitSatusHelperDto {Id = newId, Name = $"{firstName} {lastName}", isAdmite = true};
+            var admitedStudent = new AdmitSatusHelperDto {Id = newId, Name = $"{firstName} {lastName}", IsAdmitted = "Admitted"};
+            return admitedStudent;
         }
     }
 }

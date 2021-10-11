@@ -4,7 +4,10 @@ namespace SchoolSystem.Data.Helpers
 {
     public class ClassInfoHelperDto
     {        
-        public int Class { get; set; }
-        public List<TeacherInfoHelperDto> Teachers{ get; set; }
+        public int ClassOf { get; set; }
+        public string EnglishTeacher{ get; set; }
+        public string MathTeacher{ get; set; }
+        public string PhysicsTeacher{ get; set; }
+
     }
 }

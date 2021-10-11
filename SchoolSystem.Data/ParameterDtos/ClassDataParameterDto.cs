@@ -2,6 +2,6 @@
 {
     public class ClassDataParameterDto
     {
-        public int Class { get; set; }
+        public int ClassOf { get; set; }
     }
 }

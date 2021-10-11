@@ -6,6 +6,6 @@ namespace SchoolSystem.Data.Helpers
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public bool isAdmite { get; set; }
+        public string IsAdmitted { get; set; }
     }
 }
